@@ -1,0 +1,22 @@
+version: '2.1'
+services:
+  totara:
+    image: git.lambdasolutions.net:5555/composer-profiles/totara-sandbox-profile:totara9
+    links:
+      - totara_db
+    ports:
+      - "8080:8080"
+    volumes:
+       - ./totaradata:/var/www/data/default/totaradata
+    restart: always
+ 
+  totara_db:
+    image: mysql:5.7
+    environment:
+      MYSQL_DATABASE: totara
+      MYSQL_USER: totara
+      MYSQL_PASSWORD: totara
+      MYSQL_ROOT_PASSWORD: password
+    ports:
+      - "3306:3306"
+    restart: always
